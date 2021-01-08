@@ -5,6 +5,11 @@
 
 갤리더 - 간단 디시인사이드 글수집, 결산 (갤창랭킹) 프로그램 (GUI)
 
+## TODO
+* gallreader 파일 자동 업데이트 (gallreader 리포지토리 release 활용 예정)
+* 결산 (result_arrange) 컨트롤 구현
+* 정보 컨트롤 구현
+
 ## Example
 
 위 캡쳐와 같이 작업을 행하였을때 (페이지 조회, 식물갤(tree), 파일명:save, 2021-1-4~8) 저장된 CSV값:
