@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Net
 Imports System.Runtime.InteropServices
 Imports Microsoft.WindowsAPICodePack.Taskbar
 
@@ -27,9 +28,11 @@ Public Class Form1
 
     Private Sub DrawTitlePanel(activated As Boolean)
         If activated Then
+            TitlePanel.BackColor = Color.FromArgb(77, 87, 170)
             MenuPanel.BackColor = Color.FromArgb(77, 87, 170)
         Else
-            MenuPanel.BackColor = Color.White
+            TitlePanel.BackColor = Color.FromArgb(87, 97, 178)
+            MenuPanel.BackColor = Color.FromArgb(87, 97, 178)
         End If
     End Sub
 
@@ -126,10 +129,11 @@ Public Class Form1
                 TitlePrevLabel2.Text = getData(line, "title")
                 TaskbarManager.Instance.SetProgressValue(ProgressBar2.Value, ProgressBar2.Maximum)
             End If
-            End If
+        End If
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles StartCollectBT1.Click
+
         If GallIDTB1.Text = Nothing Then
             MsgBox("갤러리 ID를 입력해 주십시오", vbExclamation)
 
@@ -146,6 +150,14 @@ Public Class Form1
             MsgBox("시작 번호가 끝 번호보다 클 수 없습니다", vbExclamation)
 
         Else
+
+            If Not CheckDCURL(GallIDTB1.Text) Then
+                If MsgBox("갤러리 ID가 올바르지 않은 것 같습니다." + vbCr + "그래도 계속하시겠습니까?", vbExclamation + vbYesNo) = vbNo Then
+                    Exit Sub
+                End If
+            End If
+
+
             SetControls(False)
 
             startnum = PostIDNum1.Value
@@ -186,6 +198,13 @@ Public Class Form1
             MsgBox("앞 날짜 범위가 뒤 날짜 범위보다 나중에 와야 합니다. 순서를 바꿔 주세요.", vbExclamation)
 
         Else
+
+            If Not CheckDCURL(GallIDTB2.Text) Then
+                If MsgBox("갤러리 ID가 올바르지 않은 것 같습니다." + vbCr + "그래도 계속하시겠습니까?", vbExclamation + vbYesNo) = vbNo Then
+                    Exit Sub
+                End If
+            End If
+
             SetControls(False)
 
             startnum = PostIDNum1.Value
@@ -221,6 +240,41 @@ Public Class Form1
         Panel6.Enabled = enabled
         MenuPanel.Enabled = enabled
     End Sub
+
+    Private Function CheckDCURL(gallid As String)
+        Dim is_valid As Boolean = True
+        Dim web_response As HttpWebResponse = Nothing
+
+        Try
+            Dim web_request As HttpWebRequest = HttpWebRequest.Create("https://gall.dcinside.com/board/lists?id=" + gallid)
+            web_response = DirectCast(web_request.GetResponse(), HttpWebResponse)
+        Catch ex As Exception
+            is_valid = False
+        Finally
+            If Not (web_response Is Nothing) Then web_response.Close()
+        End Try
+
+        Return is_valid
+    End Function
+    Private Function UrlIsValid(ByVal url As String) As Boolean
+        Dim is_valid As Boolean = False
+        If url.ToLower().StartsWith("www.") Then url = "http://" & url
+
+        Dim web_response As HttpWebResponse = Nothing
+        Try
+            Dim web_request As HttpWebRequest =
+            HttpWebRequest.Create(url)
+            web_response =
+            DirectCast(web_request.GetResponse(),
+            HttpWebResponse)
+            Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            If Not (web_response Is Nothing) Then _
+            web_response.Close()
+        End Try
+    End Function
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SendMessage(GallIDTB1.Handle, &H1501, 0, "갤러리 ID 입력 (예: tree, sultan, ...)")

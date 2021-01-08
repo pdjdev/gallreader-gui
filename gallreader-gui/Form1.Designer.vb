@@ -65,7 +65,7 @@ Partial Class Form1
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.StartCollectBT2 = New System.Windows.Forms.Button()
-        Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.TitlePanel = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.MenuPanel.SuspendLayout()
@@ -80,7 +80,7 @@ Partial Class Form1
         CType(Me.PageNum2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PageNum1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
-        Me.Panel10.SuspendLayout()
+        Me.TitlePanel.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -183,6 +183,7 @@ Partial Class Form1
         Me.RichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.RichTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RichTextBox1.Font = New System.Drawing.Font("맑은 고딕", 8.2!)
+        Me.RichTextBox1.ForeColor = System.Drawing.Color.Black
         Me.RichTextBox1.Location = New System.Drawing.Point(25, 195)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.ReadOnly = True
@@ -349,6 +350,7 @@ Partial Class Form1
         Me.RichTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.RichTextBox2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RichTextBox2.Font = New System.Drawing.Font("맑은 고딕", 8.2!)
+        Me.RichTextBox2.ForeColor = System.Drawing.Color.Black
         Me.RichTextBox2.Location = New System.Drawing.Point(25, 226)
         Me.RichTextBox2.Name = "RichTextBox2"
         Me.RichTextBox2.ReadOnly = True
@@ -545,16 +547,16 @@ Partial Class Form1
         Me.StartCollectBT2.Text = "수집 시작"
         Me.StartCollectBT2.UseVisualStyleBackColor = True
         '
-        'Panel10
+        'TitlePanel
         '
-        Me.Panel10.BackColor = System.Drawing.Color.FromArgb(CType(CType(77, Byte), Integer), CType(CType(87, Byte), Integer), CType(CType(170, Byte), Integer))
-        Me.Panel10.Controls.Add(Me.PictureBox1)
-        Me.Panel10.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel10.Location = New System.Drawing.Point(0, 0)
-        Me.Panel10.Name = "Panel10"
-        Me.Panel10.Padding = New System.Windows.Forms.Padding(5)
-        Me.Panel10.Size = New System.Drawing.Size(738, 49)
-        Me.Panel10.TabIndex = 4
+        Me.TitlePanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(77, Byte), Integer), CType(CType(87, Byte), Integer), CType(CType(170, Byte), Integer))
+        Me.TitlePanel.Controls.Add(Me.PictureBox1)
+        Me.TitlePanel.Dock = System.Windows.Forms.DockStyle.Top
+        Me.TitlePanel.Location = New System.Drawing.Point(0, 0)
+        Me.TitlePanel.Name = "TitlePanel"
+        Me.TitlePanel.Padding = New System.Windows.Forms.Padding(5)
+        Me.TitlePanel.Size = New System.Drawing.Size(738, 49)
+        Me.TitlePanel.TabIndex = 4
         '
         'PictureBox1
         '
@@ -576,7 +578,7 @@ Partial Class Form1
         Me.Controls.Add(Me.MainPanel1)
         Me.Controls.Add(Me.MainPanel2)
         Me.Controls.Add(Me.MenuPanel)
-        Me.Controls.Add(Me.Panel10)
+        Me.Controls.Add(Me.TitlePanel)
         Me.Font = New System.Drawing.Font("맑은 고딕", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.Icon = Global.gallreader_gui.My.Resources.Resources.gallreader
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -598,7 +600,7 @@ Partial Class Form1
         CType(Me.PageNum1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.Panel10.ResumeLayout(False)
+        Me.TitlePanel.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -646,7 +648,7 @@ Partial Class Form1
     Friend WithEvents EndDatePicker As DateTimePicker
     Friend WithEvents Panel1 As Panel
     Friend WithEvents CheckBox3 As CheckBox
-    Friend WithEvents Panel10 As Panel
+    Friend WithEvents TitlePanel As Panel
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents ToolTip1 As ToolTip
 End Class
