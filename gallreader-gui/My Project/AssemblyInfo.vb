@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' 어셈블리 특성 값을 검토합니다.
 
-<Assembly: AssemblyTitle("DCrank-gui")>
-<Assembly: AssemblyDescription("DCrank-gui")>
+<Assembly: AssemblyTitle("gallreader-GUI")>
+<Assembly: AssemblyDescription("gallreader-GUI")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("DCrank-gui")>
+<Assembly: AssemblyProduct("gallreader-GUI")>
 <Assembly: AssemblyCopyright("Copyright © pdjdev 2021")>
 <Assembly: AssemblyTrademark("pdjdev")>
 
