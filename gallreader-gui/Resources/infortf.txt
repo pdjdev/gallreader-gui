@@ -1,0 +1,25 @@
+{\rtf1\ansi\ansicpg949\deff0\nouicompat\deflang1033\deflangfe1042{\fonttbl{\f0\fnil\fprq2\fcharset129 \'b8\'bc\'c0\'ba \'b0\'ed\'b5\'f1;}{\f1\fnil\fcharset129 \'b8\'bc\'c0\'ba \'b0\'ed\'b5\'f1;}}
+{\colortbl ;\red0\green0\blue0;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl240\slmult1\qj\cf1\b\f0\fs32\lang1042 gallreader-GUI\par
+\b0\fs18\'b0\'a3\'b4\'dc \'b5\'f0\'bd\'c3\'c0\'ce\'bb\'e7\'c0\'cc\'b5\'e5 \'b1\'db\'bc\'f6\'c1\'fd, \'b0\'e1\'bb\'ea (\'b0\'b6\'c3\'a2\'b7\'a9\'c5\'b7) \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5 GUI\par
+\par
+\b\fs20\'c0\'af\'c0\'c7\'bb\'e7\'c7\'d7\par
+\b0\fs18\'ba\'bb \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'c0\'ba \'ba\'f1\'b0\'f8\'bd\'c4 \'b1\'db \'bc\'f6\'c1\'fd \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'c0\'b8\'b7\'ce, \'c1\'a4\'bb\'f3\'c0\'fb\'c0\'ce \'c0\'db\'b5\'bf\'c0\'bb \'ba\'b8\'c0\'e5\'c7\'d8 \'b5\'e5\'b8\'b1 \'bc\'f6 \'be\'f8\'bd\'c0\'b4\'cf\'b4\'d9. \'b8\'b8\'be\'e0 gallreader.exe \'c6\'c4\'c0\'cf\'c0\'bb \'c3\'d6\'bd\'c5\'c0\'b8\'b7\'ce \'b4\'d9\'bf\'ee\'b7\'ce\'b5\'e5 \'c7\'cf\'bf\'b4\'b4\'c2\'b5\'a5\'b5\'b5 \'ba\'d2\'b1\'b8\'c7\'cf\'b0\'ed \'c1\'a4\'bb\'f3\'c0\'fb\'c0\'ce \'c0\'db\'b5\'bf\'c0\'cc \'b5\'c7\'c1\'f6 \'be\'ca\'c0\'bb \'b0\'e6\'bf\'ec \'c0\'cc\'bd\'b4 \'c6\'e4\'c0\'cc\'c1\'f6\'bf\'a1 \'ba\'b8\'b0\'ed\'c7\'d8 \'c1\'d6\'bd\'c3\'b1\'e2 \'b9\'d9\'b6\'f8\'b4\'cf\'b4\'d9.\par
+\par
+\b\fs20\'bb\'e7\'bf\'eb\'b1\'c7 \'b5\'bf\'c0\'c7\par
+\b0\fs18\'ba\'bb \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5(gallreader) \'b4\'c2 \'b9\'ab\'b7\'e1 \'bc\'d2\'c7\'c1\'c6\'ae\'bf\'fe\'be\'ee\'c0\'d4\'b4\'cf\'b4\'d9.\par
+\'ba\'bb \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'c0\'ba \'c7\'f6\'c0\'e7 \'b0\'b3\'b9\'df\'c1\'df\'c0\'cc\'b9\'c7\'b7\'ce \'c0\'cf\'ba\'ce \'b1\'e2\'b4\'c9\'c0\'cc\'b3\'aa \'c0\'db\'b5\'bf \'b5\'ee\'bf\'a1 \'b0\'e1\'c7\'d4\'c0\'cc \'c0\'d6\'c0\'bb \'bc\'f6 \'c0\'d6\'bd\'c0\'b4\'cf\'b4\'d9. \'b6\'c7\'c7\'d1 \'ba\'bb \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'c0\'b8\'b7\'ce \'c0\'ce\'c7\'d8 \'bb\'fd\'b1\'e2\'b4\'c2 \'bb\'e7\'b0\'ed\'b3\'aa \'ba\'d2\'c0\'cc\'c0\'cd\'c0\'ba \'b0\'b3\'b9\'df\'c0\'da\'b0\'a1 \'c3\'a5\'c0\'d3 \'c1\'ae \'b5\'e5\'b8\'b1 \'bc\'f6 \'be\'f8\'c0\'b8\'b4\'cf \'c2\'fc\'b0\'ed \'b9\'d9\'b6\'f8\'b4\'cf\'b4\'d9.\par
+\'c0\'cc \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'c0\'bb \'c0\'e7\'b9\'e8\'c6\'f7\'c7\'cf\'bd\'c7 \'bc\'f6\'b4\'c2 \'c0\'d6\'c0\'b8\'b3\'aa, \'b0\'b3\'b9\'df\'c0\'da \'b5\'bf\'c0\'c7\'b8\'a6 \'b0\'c5\'c4\'a1\'c1\'f6 \'be\'ca\'b0\'ed \'c0\'d3\'c0\'c7\'b7\'ce \'bc\'f6\'c1\'a4\'c7\'cf\'b0\'c5\'b3\'aa \'b0\'ed\'c4\'a3 \'b5\'da \'b9\'e8\'c6\'f7\'c7\'cf\'c1\'f6 \'b8\'b6\'bd\'c3\'b1\'e2 \'b9\'d9\'b6\'f8\'b4\'cf\'b4\'d9. \'b8\'b8\'be\'e0 \'c0\'a7\'bf\'a1 \'b4\'eb\'c7\'d8 \'b5\'bf\'c0\'c7\'c7\'cf\'c1\'f6 \'be\'ca\'b0\'c5\'b3\'aa \'bc\'b3\'c4\'a1\'b8\'a6 \'bf\'f8\'c7\'cf\'c1\'f6 \'be\'ca\'b4\'c2 \'b0\'e6\'bf\'ec, \'be\'f0\'c1\'a6\'b5\'e7\'c1\'f6 \'bc\'b3\'c4\'a1\'b8\'a6 \'c1\'df\'b4\'dc\'c7\'cf\'b0\'c5\'b3\'aa \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'c0\'bb \'c1\'a6\'b0\'c5\'c7\'cf\'bd\'c7 \'bc\'f6 \'c0\'d6\'bd\'c0\'b4\'cf\'b4\'d9.\par
+\par
+*GitHub\'bf\'a1 \'b0\'d4\'bd\'c3\'b5\'c8 \'b8\'ae\'c6\'f7\'c1\'f6\'c5\'e4\'b8\'ae\'b4\'c2 GNU \'c0\'cf\'b9\'dd \'b0\'f8\'c1\'df \'bb\'e7\'bf\'eb \'c7\'e3\'b0\'a1\'bc\'ad\'b8\'a6 \'b5\'fb\'b8\'a8\'b4\'cf\'b4\'d9.\par
+Copyright (c) 2020 Dongjun Park (@pdjdev)\par
+\par
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\par
+\par
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\par
+\par
+You should have received a copy of the GNU General Public License along with this program.  If not, see <{{\field{\*\fldinst{HYPERLINK "https://www.gnu.org/licenses/"}}{\fldrslt{https://www.gnu.org/licenses/\ul0\cf0}}}}\f0\fs18 >.\par
+
+\pard\sa200\sl240\slmult1\qj\cf0\f1\fs22\lang18\par
+}

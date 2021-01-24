@@ -71,6 +71,19 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  {\rtf1\ansi\ansicpg949\deff0\nouicompat\deflang1033\deflangfe1042{\fonttbl{\f0\fnil\fprq2\fcharset129 \&apos;b8\&apos;bc\&apos;c0\&apos;ba \&apos;b0\&apos;ed\&apos;b5\&apos;f1;}{\f1\fnil\fcharset129 \&apos;b8\&apos;bc\&apos;c0\&apos;ba \&apos;b0\&apos;ed\&apos;b5\&apos;f1;}}
+        '''{\colortbl ;\red0\green0\blue0;\red0\green0\blue255;}
+        '''{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+        '''\pard\nowidctlpar\sl384\slmult1\qj\cf1\b\f0\fs28\lang1042 gallreader-GUI\par
+        '''\b0\fs16\&apos;b0\&apos;a3\&apos;b4\&apos;dc \&apos;b5\&apos;f0\&apos;bd\&apos;c3\&apos;c0\&apos;ce\&apos;bb\&apos;e7\&apos;c0\&apos;cc\&apos;b5\&apos;e5 \&apos;b1\&apos;db\&apos;bc\&apos;f6\&apos;c1\&apos;fd, \&apos;b0\&apos;e1\&apos;bb\&apos;ea (\&apos;b0\&apos;b6\&apos;c3\[나머지 문자열은 잘림]&quot;;과(와) 유사한 지역화된 문자열을 찾습니다.
+        '''</summary>
+        Friend ReadOnly Property infortf() As String
+            Get
+                Return ResourceManager.GetString("infortf", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         '''</summary>
         Friend ReadOnly Property logo() As System.Drawing.Bitmap

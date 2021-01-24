@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Imports System.Net
 Imports System.Runtime.InteropServices
 Imports Microsoft.WindowsAPICodePack.Taskbar
@@ -43,6 +44,28 @@ Public Class Form1
     Dim endnum As Integer = 0
 
     Dim currentPrintLoc = 0
+    Dim dupListUpdated = False
+    Dim dupListChanged = False
+
+    Dim WithEvents wc As New Net.WebClient
+
+    Private Sub StartProcess(args As String)
+        If Not My.Computer.FileSystem.FileExists("gallreader.exe") Then
+            If MsgBox("작업을 위한 gallreader.exe 파일이 존재하지 않습니다. 다운로드 받으시겠습니까?", vbQuestion + vbYesNo) = vbYes Then
+                ModeSelect(4)
+                CoreDownloadStart()
+                SetControls(True)
+                Exit Sub
+            Else
+                MsgBox("작업을 진행하기 위해 gallreader.exe 파일이 필요합니다." + vbCr + vbCr _
+                       + "('정보' 탭 > 'gallreader.exe 다운로드/업데이트' 버튼을 눌러 받으실 수 있습니다.)", vbExclamation)
+                SetControls(True)
+                Exit Sub
+            End If
+        End If
+
+        StartProcess("gallreader.exe", args)
+    End Sub
 
 
     Private Sub StartProcess(FileName As String, Arguments As String)
@@ -106,9 +129,12 @@ Public Class Form1
             If currentPrintLoc = 0 Then
                 RichTextBox1.AppendText(line + Environment.NewLine)
                 RichTextBox1.ScrollToCaret()
-            Else
+            ElseIf currentPrintLoc = 1 Then
                 RichTextBox2.AppendText(line + Environment.NewLine)
                 RichTextBox2.ScrollToCaret()
+            ElseIf currentPrintLoc = 2 Then
+                RichTextBox3.AppendText(line + Environment.NewLine)
+                RichTextBox3.ScrollToCaret()
             End If
         Else
             Dim no As Integer = Convert.ToInt32(getData(line, "no"))
@@ -116,7 +142,7 @@ Public Class Form1
                 ProgressBar2.Value = no - startnum + 1
                 TitlePrevLabel1.Text = getData(line, "title")
                 TaskbarManager.Instance.SetProgressValue(ProgressBar1.Value, ProgressBar1.Maximum)
-            Else
+            ElseIf currentPrintLoc = 1 Then
                 If line.Contains("<total>") Then
                     If IsNumeric(getData(line, "total")) Then ProgressBar2.Maximum = Convert.ToInt32(getData(line, "total"))
                 End If
@@ -174,7 +200,7 @@ Public Class Form1
             ProgressBar1.Maximum = endnum - startnum + 1
 
             currentPrintLoc = 0
-            StartProcess("gallreader.exe", argv)
+            StartProcess(argv)
         End If
     End Sub
 
@@ -231,13 +257,16 @@ Public Class Form1
             argv += " -embed"
 
             currentPrintLoc = 1
-            StartProcess("gallreader.exe", argv)
+            StartProcess(argv)
         End If
     End Sub
 
     Private Sub SetControls(enabled As Boolean)
         Panel3.Enabled = enabled
         Panel6.Enabled = enabled
+        Panel10.Enabled = enabled
+        Panel14.Enabled = enabled
+        GroupBox1.Enabled = enabled
         MenuPanel.Enabled = enabled
     End Sub
 
@@ -281,6 +310,8 @@ Public Class Form1
         SendMessage(SaveNameTB1.Handle, &H1501, 0, "저장명 입력 (예: 1분기결산)")
         SendMessage(GallIDTB2.Handle, &H1501, 0, "갤러리 ID 입력 (예: tree, sultan, ...)")
         SendMessage(SaveNameTB2.Handle, &H1501, 0, "저장명 입력 (예: 1분기결산)")
+        SendMessage(ArrangeFileNameTB.Handle, &H1501, 0, "수집한 파일명 하나 이상 입력 (띄어쓰기로 파일 구분, 예: 2020-10.csv 2020-11 ...)")
+        SendMessage(SaveNameTB3.Handle, &H1501, 0, "저장명 입력 (예: 1분기집계)")
 
         StartDatePicker.Enabled = CheckBox1.Checked
         EndDatePicker.Enabled = CheckBox1.Checked
@@ -288,6 +319,8 @@ Public Class Form1
 
         StartDatePicker.Value = Today.Date
         EndDatePicker.Value = Today.Date
+
+        RichTextBox4.Rtf = My.Resources.infortf
 
         ModeSelect(1)
     End Sub
@@ -319,6 +352,8 @@ Public Class Form1
 
         MainPanel1.Hide()
         MainPanel2.Hide()
+        MainPanel3.Hide()
+        MainPanel4.Hide()
 
         Button1.FlatAppearance.MouseDownBackColor = Color.FromArgb(53, 60, 118)
         Button2.FlatAppearance.MouseDownBackColor = Color.FromArgb(53, 60, 118)
@@ -374,6 +409,9 @@ Public Class Form1
                 MainPanel2.Show()
 
             Case 3
+
+                If Not dupListUpdated Then UpdateDupList() '다중목록 업데이트
+
                 Button1.BackColor = Color.Transparent
                 Button2.BackColor = Color.Transparent
                 Button3.BackColor = Color.White
@@ -391,6 +429,8 @@ Public Class Form1
 
                 Button3.FlatAppearance.MouseDownBackColor = Color.White
                 Button3.FlatAppearance.MouseOverBackColor = Color.White
+
+                MainPanel3.Show()
 
             Case 4
                 Button1.BackColor = Color.Transparent
@@ -411,7 +451,53 @@ Public Class Form1
                 Button5.FlatAppearance.MouseDownBackColor = Color.White
                 Button5.FlatAppearance.MouseOverBackColor = Color.White
 
+                MainPanel4.Show()
+
         End Select
+    End Sub
+
+    Private Sub UpdateDupList()
+
+        ListBox1.Items.Clear()
+        ListBox2.Items.Clear()
+        ListBox3.Items.Clear()
+
+        Try
+            Dim tmp = My.Computer.FileSystem.ReadAllText("dup_list_id.txt").Replace(vbLf, "").Split(vbCr)
+            For Each s In tmp
+                If Not s.First = "#" Then
+                    ListBox1.Items.Add(s)
+                End If
+            Next
+        Catch ex As Exception
+
+        End Try
+
+        Try
+            Dim tmp = My.Computer.FileSystem.ReadAllText("dup_list_ip.txt").Replace(vbLf, "").Split(vbCr).ToList
+            For Each s In tmp
+                If Not s.First = "#" Then
+                    ListBox2.Items.Add(s)
+                End If
+            Next
+        Catch ex As Exception
+
+        End Try
+
+        Try
+            Dim tmp = My.Computer.FileSystem.ReadAllText("dup_list_nick.txt").Replace(vbLf, "").Split(vbCr).ToList
+            For Each s In tmp
+                If Not s.First = "#" Then
+                    ListBox3.Items.Add(s)
+                End If
+            Next
+        Catch ex As Exception
+
+        End Try
+
+        dupListUpdated = True
+        dupListChanged = False
+
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
@@ -454,6 +540,244 @@ Public Class Form1
             Case Else
                 ToolTip1.ToolTipTitle = Nothing
         End Select
+
+    End Sub
+
+    Private Sub ListBox1_MouseClick(sender As Object, e As MouseEventArgs) Handles ListBox1.MouseClick, ListBox2.MouseClick, ListBox3.MouseClick
+        Select Case sender.Name
+            Case ListBox1.Name
+                ListBox2.SelectedIndex = -1
+                ListBox3.SelectedIndex = -1
+            Case ListBox2.Name
+                ListBox1.SelectedIndex = -1
+                ListBox3.SelectedIndex = -1
+            Case ListBox3.Name
+                ListBox1.SelectedIndex = -1
+                ListBox2.SelectedIndex = -1
+        End Select
+    End Sub
+
+    Private Sub ListGetBT_Click(sender As Object, e As EventArgs) Handles ListGetBT.Click
+        Dim tmp As String()
+
+        If ListBox1.SelectedIndex > -1 Then
+            RadioButton1.Checked = True
+            tmp = ListBox1.GetItemText(ListBox1.SelectedItem).Split(vbTab)
+
+        ElseIf ListBox2.SelectedIndex > -1 Then
+            RadioButton2.Checked = True
+            tmp = ListBox2.GetItemText(ListBox2.SelectedItem).Split(vbTab)
+
+        ElseIf ListBox3.SelectedIndex > -1 Then
+            RadioButton3.Checked = True
+            tmp = ListBox3.GetItemText(ListBox3.SelectedItem).Split(vbTab)
+
+        Else
+            Exit Sub
+
+        End If
+
+
+        Dim count As Integer = 0
+        DupListTB.Text = Nothing
+
+        For Each i In tmp
+            If count = 0 Then
+                DupTitleTB.Text = tmp(count)
+            ElseIf count = tmp.Length - 1 Then
+                DupListTB.Text += tmp(count)
+            Else
+                DupListTB.Text += tmp(count) + vbCrLf
+            End If
+            count += 1
+        Next
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles DupListRefreshBT.Click
+        If dupListChanged Then
+            If MsgBox("저장하지 않은 항목이 있습니다. 그래도 불러오시겠습니까?", vbQuestion + vbYesNo) = vbNo Then
+                Exit Sub
+            End If
+        End If
+        UpdateDupList()
+    End Sub
+
+    Private Sub ListAddBT_Click(sender As Object, e As EventArgs) Handles ListAddBT.Click
+        Dim dupstr As String = DupTitleTB.Text + vbTab + DupListTB.Text.Replace(vbCrLf, vbTab)
+        Dim target As ListBox
+
+        If RadioButton1.Checked Then
+            target = ListBox1
+        ElseIf RadioButton2.Checked Then
+            target = ListBox2
+        ElseIf RadioButton3.Checked Then
+            target = ListBox3
+        Else
+            Exit Sub
+        End If
+
+        Dim index = target.FindString(DupTitleTB.Text)
+
+        ' 못 찾았을때 (신규)
+        If index = -1 Then
+            target.Items.Add(dupstr)
+        Else
+            If MsgBox(target.GetItemText(target.Items(index)) + vbCr + vbCr + "위 항목을 덮어씌웁니다. 계속하시겠습니까?", vbQuestion + vbYesNo) = vbYes Then
+                target.Items.RemoveAt(index)
+                target.Items.Insert(index, dupstr)
+            Else
+                Exit Sub
+            End If
+        End If
+
+        dupListChanged = True
+
+    End Sub
+
+    Private Sub DupListSaveBT_Click(sender As Object, e As EventArgs) Handles DupListSaveBT.Click
+        Try
+            If ListBox1.Items.Count > 0 Then
+                Dim tmp As String = "# 다중이 고닉들의 갤로그 ID, 집피를 넣으면 됩니다." _
+                         + vbCrLf + "# 맨 처음 항목은 무시되며, Tab 기호로 구분합니다." _
+                         + vbCrLf + "# ex) 민수	minsu1	minsu2	123.45" + vbCrLf
+                Dim count As Integer = 0
+
+                For Each i In ListBox1.Items
+                    If count = ListBox1.Items.Count - 1 Then
+                        tmp += ListBox1.GetItemText(i)
+                    Else
+                        tmp += ListBox1.GetItemText(i) + vbCrLf
+                    End If
+                Next
+
+                My.Computer.FileSystem.WriteAllText("dup_list_id.txt", tmp, False, System.Text.Encoding.UTF8)
+            End If
+
+            If ListBox2.Items.Count > 0 Then
+                Dim tmp As String = "# 같은 갤러로 알려진 IP 주소를 입력하면 됩니다." _
+                         + vbCrLf + "# 맨 처음 항목은 무시되며, Tab 기호로 구분합니다." _
+                         + vbCrLf + "# ex) 민수집피 123.45  67.89   10.11" + vbCrLf
+                Dim count As Integer = 0
+
+                For Each i In ListBox2.Items
+                    If count = ListBox2.Items.Count - 1 Then
+                        tmp += ListBox2.GetItemText(i)
+                    Else
+                        tmp += ListBox2.GetItemText(i) + vbCrLf
+                    End If
+                Next
+
+                My.Computer.FileSystem.WriteAllText("dup_list_ip.txt", tmp, False, System.Text.Encoding.UTF8)
+            End If
+
+            If ListBox3.Items.Count > 0 Then
+                Dim tmp As String = "# 같은 갤러로 알려진 유동 닉네임을 입력하면 됩니다." _
+                         + vbCrLf + "# 맨 처음 항목은 무시되며, Tab 기호로 구분합니다." _
+                         + vbCrLf + "# ex) 민수	민수	민수아님	김민수" + vbCrLf
+                Dim count As Integer = 0
+
+                For Each i In ListBox3.Items
+                    If count = ListBox3.Items.Count - 1 Then
+                        tmp += ListBox3.GetItemText(i)
+                    Else
+                        tmp += ListBox3.GetItemText(i) + vbCrLf
+                    End If
+                Next
+
+                My.Computer.FileSystem.WriteAllText("dup_list_nick.txt", tmp, False, System.Text.Encoding.UTF8)
+            End If
+        Catch ex As Exception
+            MsgBox("오류가 발생하였습니다." + vbCrLf + vbCrLf + ex.Message, vbCritical)
+            Exit Sub
+
+        End Try
+
+        MsgBox("저장이 완료되었습니다.", vbInformation)
+    End Sub
+
+    Private Sub ListRemoveBT_Click(sender As Object, e As EventArgs) Handles ListRemoveBT.Click
+        Dim target As ListBox
+
+        If ListBox1.SelectedIndex > -1 Then
+            target = ListBox1
+        ElseIf ListBox2.SelectedIndex > -1 Then
+            target = ListBox2
+        ElseIf ListBox3.SelectedIndex > -1 Then
+            target = ListBox3
+        Else
+            Exit Sub
+        End If
+
+        If MsgBox(target.GetItemText(target.SelectedItem) + vbCrLf + vbCrLf + "위 항목을 삭제하시겠습니까?", vbQuestion + vbYesNo) = vbYes Then
+            target.Items.RemoveAt(target.SelectedIndex)
+        End If
+    End Sub
+
+    Private Sub StartArrangeBT_Click(sender As Object, e As EventArgs) Handles StartArrangeBT.Click
+
+        If ArrangeFileNameTB.Text = Nothing Then
+            MsgBox("수집한 데이터 파일명을 하나 이상 입력해 주십시오", vbExclamation)
+
+        ElseIf SaveNameTB3.Text = Nothing Then
+            MsgBox("저장 파일명을 입력해 주십시오", vbExclamation)
+        Else
+
+            SetControls(False)
+
+            currentPrintLoc = 2
+            StartProcess("-a " + ArrangeFileNameTB.Text + " " + SaveNameTB3.Text)
+        End If
+    End Sub
+
+    Private Sub CoreUpdateBT_Click(sender As Object, e As EventArgs) Handles CoreUpdateBT.Click
+        If My.Computer.FileSystem.FileExists("gallreader.exe") Then
+            If MsgBox("이미 파일이 존재합니다. 덮어 씌우고 다시 받으시겠습니까?", vbQuestion + vbYesNo) = vbNo Then
+                Exit Sub
+            End If
+        End If
+
+        CoreDownloadStart()
+    End Sub
+
+    Private Sub CoreDownloadStart()
+        If wc.IsBusy Then
+            MsgBox("이미 다운로드가 진행중입니다. 잠시 후 다시 시도해 주세요.", vbExclamation)
+            Exit Sub
+        Else
+            Try
+                My.Computer.FileSystem.DeleteFile("gallreader.exe")
+            Catch ex As Exception
+
+            End Try
+        End If
+
+        Try
+            Dim tmp = webget("https://raw.githubusercontent.com/pdjdev/gallreader/main/latest.txt")
+            tmp = getData(tmp, "url")
+
+            wc.DownloadFileAsync(New Uri(tmp), "gallreader.exe")
+        Catch ex As Exception
+            MsgBox("다운로드에 실패하였습니다." + vbCr + "(인터넷 연결을 확인해 주시고 다시 시도해 주세요.)" + vbCr + vbCr + ex.Message, vbCritical)
+            Exit Sub
+        End Try
+
+        CoreUpdateBT.Enabled = False
+        SetControls(False)
+    End Sub
+
+    Private Sub wc_DownloadProgressChanged(sender As Object, e As DownloadProgressChangedEventArgs) Handles wc.DownloadProgressChanged
+        CoreUpdateBT.Text = e.ProgressPercentage.ToString + "%"
+    End Sub
+
+    Private Sub wc_DownloadFileCompleted(sender As Object, e As AsyncCompletedEventArgs) Handles wc.DownloadFileCompleted
+        CoreUpdateBT.Text = "gallreader.exe 다운로드/업데이트"
+        MsgBox("다운로드가 완료되었습니다.", vbInformation)
+
+        CoreUpdateBT.Enabled = True
+        SetControls(True)
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
 
     End Sub
 End Class

@@ -13,4 +13,14 @@
     Public Function getData(datastr As String, name As String) As String
         Return midReturn("<" + name + ">", "</" + name + ">", datastr)
     End Function
+
+    Public Function webget(url As String)
+        Dim source = New System.Net.WebClient()
+        source.Encoding = System.Text.Encoding.UTF8
+
+        Dim sourcestr As String = Nothing
+        sourcestr = source.DownloadString(url)
+
+        Return sourcestr
+    End Function
 End Module

@@ -149,6 +149,7 @@
     <Content Include="gallreader.ico" />
     <None Include="Resources\gallreader.ico" />
     <None Include="Resources\logo.png" />
+    <None Include="Resources\infortf.txt" />
     <Content Include="Windows Logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
