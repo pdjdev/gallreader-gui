@@ -10,7 +10,7 @@
 * ~~결산 (result_arrange) 컨트롤 구현~~
 * ~~정보 컨트롤 구현~~
 * 도움말 문서 생성
-* 도움말 LabelLink 활성화
+* 도움말 LinkLabel 활성화
 
 ## Example
 
