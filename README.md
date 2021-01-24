@@ -6,9 +6,11 @@
 갤리더 - 간단 디시인사이드 글수집, 결산 (갤창랭킹) 프로그램 (GUI)
 
 ## TODO
-* gallreader 파일 자동 업데이트 (gallreader 리포지토리 release 활용 예정)
-* 결산 (result_arrange) 컨트롤 구현
-* 정보 컨트롤 구현
+* ~~gallreader 파일 자동 업데이트 (gallreader 리포지토리 release 활용 예정)~~
+* ~~결산 (result_arrange) 컨트롤 구현~~
+* ~~정보 컨트롤 구현~~
+* 도움말 문서 생성
+* 도움말 LabelLink 활성화
 
 ## Example
 
