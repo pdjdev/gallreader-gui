@@ -325,6 +325,17 @@ Public Class Form1
         ModeSelect(1)
     End Sub
 
+    Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        If Not My.Computer.FileSystem.FileExists("gallreader.exe") Then
+            If MsgBox("작업을 위한 gallreader.exe 파일이 존재하지 않습니다. 다운로드 받으시겠습니까?", vbQuestion + vbYesNo) = vbYes Then
+                ModeSelect(4)
+                CoreDownloadStart()
+                SetControls(True)
+                Exit Sub
+            End If
+        End If
+    End Sub
+
     Private Sub Form1_Deactivate(sender As Object, e As EventArgs) Handles Me.Deactivate
         DrawTitlePanel(False)
     End Sub
@@ -766,7 +777,7 @@ Public Class Form1
     End Sub
 
     Private Sub wc_DownloadProgressChanged(sender As Object, e As DownloadProgressChangedEventArgs) Handles wc.DownloadProgressChanged
-        CoreUpdateBT.Text = e.ProgressPercentage.ToString + "%"
+        CoreUpdateBT.Text = e.ProgressPercentage.ToString + "%" + " (" + (e.BytesReceived \ 1024).ToString + "KB/" + (e.TotalBytesToReceive \ 1024).ToString + "KB)"
     End Sub
 
     Private Sub wc_DownloadFileCompleted(sender As Object, e As AsyncCompletedEventArgs) Handles wc.DownloadFileCompleted
