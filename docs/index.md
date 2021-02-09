@@ -1,5 +1,5 @@
 # gallreader-gui
-<img src="gallreadergui_logo.png" height="80">
+<img src="/gallreadergui_logo.png" height="80">
 
 ![capture](/capture.gif)
 
