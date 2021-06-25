@@ -66,6 +66,7 @@ Partial Class Form1
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.StartCollectBT2 = New System.Windows.Forms.Button()
         Me.TitlePanel = New System.Windows.Forms.Panel()
+        Me.Button9 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.MainPanel3 = New System.Windows.Forms.Panel()
@@ -617,6 +618,7 @@ Partial Class Form1
         'TitlePanel
         '
         Me.TitlePanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(77, Byte), Integer), CType(CType(87, Byte), Integer), CType(CType(170, Byte), Integer))
+        Me.TitlePanel.Controls.Add(Me.Button9)
         Me.TitlePanel.Controls.Add(Me.PictureBox1)
         Me.TitlePanel.Dock = System.Windows.Forms.DockStyle.Top
         Me.TitlePanel.Location = New System.Drawing.Point(0, 0)
@@ -624,6 +626,23 @@ Partial Class Form1
         Me.TitlePanel.Padding = New System.Windows.Forms.Padding(5)
         Me.TitlePanel.Size = New System.Drawing.Size(738, 49)
         Me.TitlePanel.TabIndex = 4
+        '
+        'Button9
+        '
+        Me.Button9.BackColor = System.Drawing.Color.FromArgb(CType(CType(77, Byte), Integer), CType(CType(87, Byte), Integer), CType(CType(170, Byte), Integer))
+        Me.Button9.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Button9.FlatAppearance.BorderSize = 0
+        Me.Button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button9.Font = New System.Drawing.Font("맑은 고딕", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Button9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(189, Byte), Integer), CType(CType(195, Byte), Integer), CType(CType(239, Byte), Integer))
+        Me.Button9.Location = New System.Drawing.Point(605, 5)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(128, 39)
+        Me.Button9.TabIndex = 3
+        Me.Button9.Text = "도움말 보기"
+        Me.ToolTip1.SetToolTip(Me.Button9, "통신사 IP, 지정한 다중 계정 목록을" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "바탕으로 수집한 데이터(.csv)를 집계합니다." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "아래의 경우 자동으로 묶음 처리됩니다:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "'ㅇㅇ' " &
+        "닉네임의 유동 통신사 IP글" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "같은 고닉 ID의 다른 닉네임글" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "같은 유동 닉네임의 다른 IP글")
+        Me.Button9.UseVisualStyleBackColor = False
         '
         'PictureBox1
         '
@@ -1366,4 +1385,5 @@ Partial Class Form1
     Friend WithEvents Button7 As Button
     Friend WithEvents Button8 As Button
     Friend WithEvents Panel19 As Panel
+    Friend WithEvents Button9 As Button
 End Class

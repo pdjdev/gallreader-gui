@@ -139,7 +139,7 @@ Public Class Form1
         Else
             Dim no As Integer = Convert.ToInt32(getData(line, "no"))
             If currentPrintLoc = 0 Then
-                ProgressBar2.Value = no - startnum + 1
+                ProgressBar1.Value = no - startnum + 1
                 TitlePrevLabel1.Text = getData(line, "title")
                 TaskbarManager.Instance.SetProgressValue(ProgressBar1.Value, ProgressBar1.Maximum)
             ElseIf currentPrintLoc = 1 Then
@@ -790,5 +790,23 @@ Public Class Form1
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
 
+    End Sub
+
+    Sub ShowHelp()
+        HelpBrowser.Height = Height
+        HelpBrowser.SetDesktopLocation(Location.X + Width, Location.Y)
+        HelpBrowser.Show()
+    End Sub
+
+    Private Sub Form1_LocationChanged(sender As Object, e As EventArgs) Handles MyBase.LocationChanged
+        HelpBrowser.SetDesktopLocation(Location.X + Width, Location.Y)
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        If Application.OpenForms().OfType(Of HelpBrowser).Any Then
+            HelpBrowser.Close()
+        Else
+            ShowHelp()
+        End If
     End Sub
 End Class
